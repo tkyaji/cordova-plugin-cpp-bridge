@@ -1,0 +1,10 @@
+#import <Cordova/CDV.h>
+
+/*INCLUDE*/
+
+@interface CDVCppBridge : CDVPlugin {
+}
+
+/*PROTOTYPE*/
+
+@end

@@ -1,0 +1,8 @@
+JNIEXPORT /*JTYPE*/ JNICALL
+/*METHOD*/(JNIEnv *env, jobject instance/*PARAMS*/) {
+/*GET_INSTANCE*/
+/*GET_STRINGS*/
+/*CALL_METHOD*/
+/*RELEASE_STRINGS*/
+/*RETURN*/
+}

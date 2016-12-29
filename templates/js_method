@@ -1,0 +1,3 @@
+/*INDEND*//*METHOD_JS*/: function(/*METHOD_PARAMS*/success, error) {
+/*INDEND*/    exec(function(ret) {success((ret != null && typeof ret == 'object' && ret.ret) ? ret.ret : ret);}, error, "/*PLUGIN_NAME*/", "/*METHOD_NATIVE*/"/*EXEC_PARAMS*/);
+/*INDEND*/}

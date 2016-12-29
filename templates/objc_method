@@ -1,0 +1,15 @@
+- (void)/*METHOD*/:(CDVInvokedUrlCommand*)command {
+    if (command.arguments.count != /*PARAM_COUNT*/) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"invalid parameters."] callbackId:command.callbackId];
+        return;
+    }
+
+/*GET_INSTANCE*/
+
+/*PARAMS*/
+
+/*CALL_METHOD*/
+
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK /*MESSAGE_AS_TYPE*/];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}

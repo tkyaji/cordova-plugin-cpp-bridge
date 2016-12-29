@@ -1,0 +1,16 @@
+            put("/*ACTION*/", new CppBridgeAction() {
+                @Override
+                public boolean invoke(JSONArray data, CallbackContext callbackContext) {
+                    if (data.length() != /*PARAM_COUNT*/) {
+                        callbackContext.error("invalid parameters.");
+                        return false;
+                    }
+                    try {
+/*CALL_METHOD*/
+                        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK/*RETURN*/));
+                    } catch (Exception ex) {
+                        return false;
+                    }
+                    return true;
+                }
+            });

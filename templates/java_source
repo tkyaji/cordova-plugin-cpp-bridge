@@ -1,0 +1,40 @@
+package com.tkyaji.cordova;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PluginResult;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class CDVCppBridge extends CordovaPlugin {
+
+    static {
+        System.loadLibrary("cordova-cpp-bridge-lib");
+    }
+
+/*NATIVE_METHODS*/
+
+    private static Map<String, CppBridgeAction> actionRunnerMap = new HashMap<String, CppBridgeAction>() {
+        {
+/*METHODS*/
+        }
+    };
+
+    @Override
+    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+        CppBridgeAction bridgeAction = actionRunnerMap.get(action);
+        if (bridgeAction == null) {
+            return false;
+        }
+        return bridgeAction.invoke(data, callbackContext);
+    }
+
+
+    private interface CppBridgeAction {
+        boolean invoke(JSONArray data, CallbackContext callbackContext);
+    }    
+}

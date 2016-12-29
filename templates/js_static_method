@@ -1,0 +1,3 @@
+            /*METHOD_JS*/: function(/*METHOD_PARAMS*/success, error) {
+                exec(success, error, "/*PLUGIN_NAME*/", "/*METHOD_NATIVE*/"/*EXEC_PARAMS*/);
+            }

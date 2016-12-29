@@ -1,0 +1,17 @@
+#include <jni.h>
+
+/*INCLUDE*/
+
+#ifndef _CDVCppBridge
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/*METHODS*/
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
