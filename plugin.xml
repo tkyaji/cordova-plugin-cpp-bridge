@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-cpp-bridge" version="0.0.2"
+<plugin id="cordova-plugin-cpp-bridge" version="0.0.3"
     xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     
     <name>CordovaCppBridge</name>
@@ -14,6 +14,10 @@
         <js-module name="CordovaCppBridge" src="www/CDVCppBridge.js">
             <clobbers target="cpp" />
         </js-module>
+        
+        <hook type="after_plugin_add" src="hooks/after_plugin_add.js" />
+        <hook type="before_plugin_rm" src="hooks/before_plugin_rm.js" />
+        <hook type="after_prepare" src="hooks/after_prepare.js" />
     </platform>
     
     <platform name="android">
@@ -27,10 +31,10 @@
         <js-module name="CordovaCppBridge" src="www/CDVCppBridge.js">
             <clobbers target="cpp" />
         </js-module>
+
+        <hook type="after_plugin_add" src="hooks/after_plugin_add.js" />
+        <hook type="before_plugin_rm" src="hooks/before_plugin_rm.js" />
+        <hook type="after_prepare" src="hooks/after_prepare.js" />
     </platform>
-    
-    <hook type="after_plugin_add" src="hooks/after_plugin_add.js" />
-    <hook type="before_plugin_rm" src="hooks/before_plugin_rm.js" />
-    <hook type="after_prepare" src="hooks/after_prepare.js" />
-    
+
 </plugin>

@@ -1,9 +1,8 @@
-var pluginName = 'CordovaCppBridge';
 var pluginId = 'cordova-plugin-cpp-bridge';
 
 module.exports = function(context) {
 
-    if (context.opts.plugins[0].indexOf(pluginId) == -1 && context.opts.plugins[0].indexOf(pluginName) == -1) {
+    if (context.opts.plugins[0].indexOf(pluginId) == -1) {
         return;
     }
 
