@@ -2,15 +2,15 @@
 
 This plugin makes it easy to call C++ from Javascript.
 
-## Usage
+# Usage
 
-### 1. Add Plugin
+## 1. Add Plugin
 
 ```
 cordova plugin add cordova-plugin-cpp-bridge
 ```
 
-### 2. Add C++ Files to `cpp` directory
+## 2. Add C++ Files to `cpp` directory
 
 The cpp directory has been added to your project when adding this plugin.
 
@@ -41,7 +41,7 @@ const char* TestCpp::staticTestMethod() {
 ```
 
 
-### 3. Edit `class_define.json`
+## 3. Edit `class_define.json`
 
 Describe the interface of the class in `class_define.json`.
 This file is created in the `cpp` directory.
@@ -94,7 +94,7 @@ class_define.json
 }
 ```
 
-### 4. Call cpp method from JavaScript.
+## 4. Call cpp method from JavaScript.
 
 **ex.**
 
@@ -111,7 +111,7 @@ cpp.TestCpp.staticTestMethod(function(ret) {
 ```
 
 
-### 5. Build
+## 5. Build
 
 ```
 cordova build ios / android
