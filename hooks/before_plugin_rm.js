@@ -23,8 +23,8 @@ module.exports = function(context) {
         var platformApi = platforms.getPlatformApi(platform, platformPath);
         var platformInfo = platformApi.getPlatformInfo();
 
-        if (platform == 'ios') {
-            removeFiles_ios(platformInfo);
+        if (platform == 'ios' || platform == 'osx') {
+            removeFiles_ios_osx(platformInfo);
 
         } else if (platform == 'android') {
             removeFiles_android(platformInfo);
@@ -32,7 +32,7 @@ module.exports = function(context) {
     });
 
 
-    function removeFiles_ios(platformInfo) {
+    function removeFiles_ios_osx(platformInfo) {
         var xcode = context.requireCordovaModule('xcode');
         var pbxproj = platformInfo.locations.pbxproj;
         var proj = xcode.project(pbxproj);
@@ -138,4 +138,5 @@ module.exports = function(context) {
             }
         }
     }
+
 }

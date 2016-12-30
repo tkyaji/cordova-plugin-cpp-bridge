@@ -2,6 +2,14 @@
 
 This plugin makes it easy to call C++ from Javascript.
 
+
+# Platform
+
+* iOS
+* Android
+* OSX
+
+
 # Usage
 
 ## 1. Add Plugin

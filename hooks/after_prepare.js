@@ -30,14 +30,14 @@ module.exports = function(context) {
         var platformInfo = platformApi.getPlatformInfo();
         var cfg = new ConfigParser(platformInfo.projectConfig.path);
 
-        if (platform == 'ios') {
-            (new IOSManager(context, platformInfo, cppDir, classDefine, headerFiles, sourceFiles)).setup();
+        if (platform == 'ios' || platform == 'osx') {
+            (new IOS_OSXManager(context, platformInfo, cppDir, classDefine, headerFiles, sourceFiles)).setup();
+            (new JsManager(context, platformInfo, classDefine).setup());
 
         } else if (platform == 'android') {
             (new AndroidManager(context, platformInfo, cppDir, classDefine, headerFiles, sourceFiles)).setup();
+            (new JsManager(context, platformInfo, classDefine).setup());
         }
-
-        (new JsManager(context, platformInfo, classDefine).setup());
     });
 
     function normalizeClassDefine(classDefine) {
@@ -59,7 +59,7 @@ module.exports = function(context) {
 }
 
 
-var IOSManager = function(context, platformInfo, cppDir, classDefine, headerFiles, sourceFiles) {
+var IOS_OSXManager = function(context, platformInfo, cppDir, classDefine, headerFiles, sourceFiles) {
 
     var path              = context.requireCordovaModule('path'),
         fs                = context.requireCordovaModule('fs'),
@@ -105,8 +105,8 @@ var IOSManager = function(context, platformInfo, cppDir, classDefine, headerFile
             proj.addHeaderFile(path.join(pluginId, bridgeFileName + '.h'));
             proj.addSourceFile(path.join(pluginId, bridgeFileName + '.mm'));
 
-            fs.createReadStream(path.join(templateDir, 'ios_NativeLog.h')).pipe(fs.createWriteStream(path.join(destPluginDir, 'NativeLog.h')));
-            fs.createReadStream(path.join(templateDir, 'ios_NativeLog.mm')).pipe(fs.createWriteStream(path.join(destPluginDir, 'NativeLog.mm')));
+            fs.createReadStream(path.join(templateDir, 'ios_osx_NativeLog.h')).pipe(fs.createWriteStream(path.join(destPluginDir, 'NativeLog.h')));
+            fs.createReadStream(path.join(templateDir, 'ios_osx_NativeLog.mm')).pipe(fs.createWriteStream(path.join(destPluginDir, 'NativeLog.mm')));
             proj.addHeaderFile(path.join(pluginId, 'NativeLog.h'));
             proj.addSourceFile(path.join(pluginId, 'NativeLog.mm'));
 
@@ -273,7 +273,7 @@ var IOSManager = function(context, platformInfo, cppDir, classDefine, headerFile
             'int': 'NSNumber*',
             'double': 'NSNumber*',
             'string': 'NSString*',
-            'boolean': 'BOOL'
+            'boolean': 'NSNumber*'
         }[type];
     }
 
@@ -314,7 +314,7 @@ var IOSManager = function(context, platformInfo, cppDir, classDefine, headerFile
             'int': '[' + varName + ' intValue]',
             'double': '[' + varName + ' doubleValue]',
             'string': '[' + varName + ' UTF8String]',
-            'boolean': '(bool)' + varName
+            'boolean': '[' + varName + ' boolValue]'
         }[type];
     }
 }
@@ -823,7 +823,9 @@ var JsManager = function(context, platformInfo, classDefine) {
         fs.writeFileSync(path.join(wwwDir, bridgeFileName + '.js'), source);
 
         var platformWwwDir = path.join(platformInfo.locations.platformWww, 'plugins', pluginId, 'www');
-        fs.writeFileSync(path.join(platformWwwDir, bridgeFileName + '.js'), source);
+        if (platformWwwDir) {
+            fs.writeFileSync(path.join(platformWwwDir, bridgeFileName + '.js'), source);
+        }
     }
 
     function createClass(classElement, className) {
