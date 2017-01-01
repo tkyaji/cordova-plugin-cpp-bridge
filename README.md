@@ -65,9 +65,9 @@ class_define.json
         "<class name>": {
             "methods": {
                 "<method name>": {
-                    "params": [<int / double / string / boolean>, ...],
-                    "return": "<int / double / string / boolean>",
-                    "is_static": <true / false>
+                    "params": [<int / double / string / boolean>, ...],     // optional
+                    "return": "<void / int / double / string / boolean>",   // optional (default:void)
+                    "is_static": <true / false>                             // optional (default:false)
                 }
                 , ...
             }

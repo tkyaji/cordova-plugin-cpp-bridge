@@ -4,7 +4,7 @@
   "description": "binding cpp",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/tkyaji/cordova-plugin-cpp-bridge"
   },
   "keywords": [
     "ecosystem:cordova",
