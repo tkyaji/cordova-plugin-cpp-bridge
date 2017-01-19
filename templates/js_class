@@ -1,17 +1,17 @@
         /*CLASS*/: {
             new: function(/*CONSTRUCTOR_PARAMS*/success, error) {
-                exec(function(_instanceId) {
+                exec(function(instanceId) {
                     var jsInstance = new (function(_instanceId) {
-                        var className = '/*CLASS*/';
-                        var instanceId = _instanceId;
                         return {
+                            _className: '/*CLASS*/',
+                            _instanceId: _instanceId,
                             delete: function(success, error) {
                                 exec(success, error, "/*PLUGIN_NAME*/", "/*CLASS*/_delete", [instanceId]);
                             }
 /*METHODS*/
                         }
 
-                    })(_instanceId);
+                    })(instanceId);
 
                     success(jsInstance);
 

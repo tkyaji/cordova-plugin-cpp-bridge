@@ -267,7 +267,7 @@ var IOS_OSXManager = function(context, platformInfo, cppDir, classDefine, header
 
     function getType_objc(type) {
         if (allClassList.indexOf(type) > -1) {
-            return 'NSNumber*';
+            return 'NSString*';
         }
         return {
             'int': 'NSNumber*',
@@ -308,7 +308,7 @@ var IOS_OSXManager = function(context, platformInfo, cppDir, classDefine, header
         var idx = allClassList.indexOf(type);
         if (idx > -1) {
             var className = allClassList[idx];
-            return '(' + className + '*)[' + varName + ' unsignedLongValue]';
+            return '(' + className + '*)(unsigned long)[' + varName + ' longLongValue]';
         }
         return {
             'int': '[' + varName + ' intValue]',
@@ -832,6 +832,11 @@ var JsManager = function(context, platformInfo, classDefine) {
 
         var params = range(classElement.constructor.params.length).map(function(i) {return 'param' + i});
         var constructorParams = (params.length == 0) ? '' : params.join(', ') + ', ';
+        range(range.length).forEach(function(i) {
+            if (allClassList.indexOf(classElement.constructor.params[i]) > -1) {
+                params[i] += '._instanceId';
+            }
+        });
         var constructorExecParams = ', [' + params.join(', ') + ']';
 
         var methodList = [];
@@ -865,11 +870,16 @@ var JsManager = function(context, platformInfo, classDefine) {
     function createMethod(methodElement, methodName, className) {
 
         var params = range(methodElement.params.length).map(function(i) {return 'param' + i});
+        var methodParams = (params.length == 0) ? '' : params.join(', ') + ', ';
+        range(range.length).forEach(function(i) {
+            if (allClassList.indexOf(methodElement.params[i]) > -1) {
+                params[i] += '._instanceId';
+            }
+        });
         if (!methodElement.is_static) {
             params.unshift('instanceId');
         }
-        var methodParams = (params.length == 0) ? '' : params.join(', ') + ', ';
-        var execParams = ', [' + params.join(', ') + ']';
+        var execParams = ', [' + params.concat([]).join(', ') + ']';
 
         var methodJs = methodName;
         var methodNative = className + ((methodElement.is_static) ? '_sm_' : '_mm_') + methodName;
