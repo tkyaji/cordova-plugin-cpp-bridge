@@ -830,13 +830,9 @@ var JsManager = function(context, platformInfo, classDefine) {
 
     function createClass(classElement, className) {
 
-        var constructorParams = '';
-        var constructorExecParams = '';
-        if (classElement.constructor.params.length > 0) {
-            params = range(classElement.constructor.length).map(function(i) {return 'param' + i}) + ', ';
-            constructorParams = params + ', ';
-            constructorExecParams = ', [' + params + ']';
-        }
+        var params = range(classElement.constructor.params.length).map(function(i) {return 'param' + i});
+        var constructorParams = (params.length == 0) ? '' : params.join(', ') + ', ';
+        var constructorExecParams = ', [' + params.join(', ') + ']';
 
         var methodList = [];
         var staticMethodList = [];
@@ -868,16 +864,12 @@ var JsManager = function(context, platformInfo, classDefine) {
 
     function createMethod(methodElement, methodName, className) {
 
-        var methodParams = '';
-        var execParams = '';
-        if (methodElement.params.length > 0) {
-            var params = range(methodElement.params.length).map(function(i) {return 'param' + i});
-            methodParams = params.join(', ') + ', ';
-            if (!methodElement.is_static) {
-                params.unshift('instanceId');
-            }
-            execParams = ', [' + params.join(', ') + ']';
+        var params = range(methodElement.params.length).map(function(i) {return 'param' + i});
+        if (!methodElement.is_static) {
+            params.unshift('instanceId');
         }
+        var methodParams = (params.length == 0) ? '' : params.join(', ') + ', ';
+        var execParams = ', [' + params.join(', ') + ']';
 
         var methodJs = methodName;
         var methodNative = className + ((methodElement.is_static) ? '_sm_' : '_mm_') + methodName;
@@ -929,4 +921,3 @@ function range(i1, i2) {
     }
     return list;
 }
-

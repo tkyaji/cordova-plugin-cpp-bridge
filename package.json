@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-cpp-bridge",
-  "version": "0.0.5",
-  "description": "binding cpp",
+  "version": "0.0.6",
+  "description": "This plugin makes it easy to call C++ from Javascript.",
   "repository": {
     "type": "git",
     "url": "https://github.com/tkyaji/cordova-plugin-cpp-bridge"
